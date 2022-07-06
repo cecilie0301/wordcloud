@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src='./lib/echarts.min.js'></script>
+        <script src='./lib/echarts-wordcloud.min.js'></script>
+    </head>
+    <body>
+        <style>
+            html, body, #main {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+        </style>
+        <div id='main'></div>
+        <script>
+            var chart = echarts.init(document.getElementById('main'));
+
+            var option = {
+                tooltip: {},
+                series: [ {
+                    type: 'wordCloud',
+                    gridSize: 2,
+                    sizeRange: [12, 50],
+                    rotationRange: [-90, 90],
+                    shape: 'pentagon',
+                    width: 600,
+                    height: 400,
+                    drawOutOfBound: true,
+                    textStyle: {
+                        color: function () {
+                            return 'rgb(' + [
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160),
+                                Math.round(Math.random() * 160)
+                            ].join(',') + ')';
+                        }
+                    },
+                    emphasis: {
+                        textStyle: {
+                            shadowBlur: 10,
+                            shadowColor: '#333'
+                        }
+                    },
+                    data: [
+                        {
+                            name: '新浪网',
+                            value: 6181,
+                            url:'https://news.sina.com.cn/'
+                        },
+                        {
+                            name: '搜狐新闻',
+                            value: 4386,
+                            url:'https://www.sohu.com/'
+                        },
+                        {
+                            name: '人民日报',
+                            value: 4055,
+                            url:'http://www.people.com.cn/'
+                        },
+                        {
+                            name: '光明日报',
+                            value: 2467,
+                            url:'https://epaper.gmw.cn/'
+                        },
+                        {
+                            name: '新华网',
+                            value: 2244,
+                            url:'http://news.cn/'
+                        },
+                        {
+                            name: '央视新闻',
+                            value: 1898,
+                            url:'https://news.cctv.com/'
+                        },
+                        {
+                            name: '经济日报',
+                            value: 1484,
+                            url:'http://paper.ce.cn/'
+                        }]
+
+                    
+                }]
+  
+            };
+            
+            chart.setOption(option);
+            chart.on("click", function(params) {
+            console.log(params); 
+                    window.open(params.data.url,'target');
+       
+        });
+
+            window.onresize = chart.resize;
+        </script>
+    </body>
+</html>
